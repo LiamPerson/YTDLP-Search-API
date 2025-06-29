@@ -1,3 +1,7 @@
+// Configure the environment for non-standard-system users
+import { config } from 'dotenv'
+config({ quiet: true })
+
 // Just error if the person doesn't have their .env setup
 const searchDirectory = process.env.YTDLP_DIRECTORY
 if (!searchDirectory) {

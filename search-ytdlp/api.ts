@@ -8,6 +8,10 @@ import { distributeTasksToWorkers } from './main'
 import dayjs from 'dayjs'
 import { handleSend } from './file-server'
 import NodeCache from 'node-cache'
+import { config } from 'dotenv'
+
+// Configure the environment for non-standard-system users
+config({ quiet: true })
 
 // Create and configure your cache instance with a default TTL (in seconds)
 const cache = new NodeCache({ stdTTL: 30 })
