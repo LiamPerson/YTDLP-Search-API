@@ -70,6 +70,26 @@ The port used is whatever you define in your `.env` file.
 npm run api
 ```
 
+### API Examples
+
+Search at `/search`
+
+```sh
+# Example searching for 'blender' returning 20 results:
+curl "http://localhost:5020/search?q=blender&r=20"
+```
+
+Get files at `/file`
+
+```sh
+# Example getting a file from /home/user/videos/ExAmPleVid3o.info.json
+curl "http://localhost:5020/file?url=file:///home/user/videos/ExAmPleVid3o.info.json"
+```
+
+### API Caching
+
+By default, the caching persists responses for 5 minutes. This is set up with `cacheMiddleware`.
+
 # Options
 
 Both the API and command line searches have options to help you search better. The API uses GET query parameters (e.g: `r=10`) and the command line interface uses flags (e.g: `-r`).
@@ -80,3 +100,7 @@ Both the API and command line searches have options to help you search better. T
 | directory | `-d`     | `d`           | The directory where your videos are              | A string specifying the directory                                                                                                                                                                                |
 | results   | `-r`     | `r`           | How many results you want to get back            | any positive number above 0                                                                                                                                                                                      |
 | sort      | `-s`     | `s`           | What algorithm to use for your search            | `fuzzy` = uses similar words, `language` = uses natural language processing to determine best fit, `normal` = uses both fuzzy and natural language to varying degrees (recommended), `random` = literally random |
+
+# Disclaimer
+
+This is not production ready. The API has a lot of access. Do not use this in a production environment or expose the API to the open web unless you know what you're doing.
