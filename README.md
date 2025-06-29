@@ -18,7 +18,7 @@ The API has caching too, so you can reduce load on your CPU and drives if you ha
 
 # Usage
 
-This tool **requires** your videos to have an **accompanying json metadata file**. You can easily do this by adding `--write-info-json` to your yt-dlp commands. It uses the data from these files to understand which videos are most relevant to your search.
+This tool **requires** your videos to have an **accompanying json metadata file**. You can easily do this by adding `--write-info-json` to your yt-dlp commands. It uses the data from these files to understand which videos are most relevant to your search. I recommend keeping your video titles downloaded as just their IDs to avoid name collissions.
 
 ```sh
 # yt-dlp.conf
