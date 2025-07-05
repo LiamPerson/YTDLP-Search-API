@@ -95,7 +95,13 @@ const handleSearch = (request: any, response: any) => {
 
 	const { results: resultsLimit, cores: workerCount, directory: jsonDirectory, sort: sortAlgorithm, query } = params
 
-	const workerPromises = distributeTasksToWorkers({ jsonDirectory, workerCount, query, source: __filename })
+	let workerPromises
+	try {
+		workerPromises = distributeTasksToWorkers({ jsonDirectory, workerCount, query, source: __filename })
+	} catch (err) {
+		console.error(err)
+		return response.status(500).send('Internal Server Error')
+	}
 
 	Promise.all(workerPromises)
 		.then((results) => {
