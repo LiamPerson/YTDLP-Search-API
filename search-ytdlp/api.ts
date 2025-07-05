@@ -95,6 +95,7 @@ const handleSearch = (request: any, response: any) => {
 
 	const { results: resultsLimit, cores: workerCount, directory: jsonDirectory, sort: sortAlgorithm, query } = params
 
+	// I put this in a try/catch because it was getting memory errors at larger folders.
 	let workerPromises
 	try {
 		workerPromises = distributeTasksToWorkers({ jsonDirectory, workerCount, query, source: __filename })
