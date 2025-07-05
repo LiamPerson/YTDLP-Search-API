@@ -3,7 +3,10 @@
 		"test": "jest",
 		"cli": "ts-node search-ytdlp/cli.ts",
 		"search": "ts-node search-ytdlp/cli.ts",
-		"api": "ts-node search-ytdlp/api.ts"
+		"api": "ts-node search-ytdlp/api.ts",
+		"testSearch": "ts-node test/search.ts",
+		"buildSearch": "ts-node test/build.ts",
+		"buildExample": "ts-node test/buildExample.ts"
 	},
 	"dependencies": {
 		"commander": "^12.1.0",
