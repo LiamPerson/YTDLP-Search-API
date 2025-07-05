@@ -18,7 +18,7 @@ The API has caching too, so you can reduce load on your CPU and drives if you ha
 
 # Usage
 
-This tool **requires** your videos to have an **accompanying json metadata file**. You can easily do this by adding `--write-info-json` to your yt-dlp commands. It uses the data from these files to understand which videos are most relevant to your search. I recommend keeping your video titles downloaded as just their IDs to avoid name collissions. 
+This tool **requires** your videos to have an **accompanying json metadata file**. You can easily do this by adding `--write-info-json` to your yt-dlp commands. It uses the data from these files to understand which videos are most relevant to your search. I recommend keeping your video titles downloaded as just their IDs to avoid name collisions.
 
 Below is a recommended [yt-dlp.conf](https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#configuration):
 
@@ -49,6 +49,12 @@ Example `.env` file:
 YTDLP_DIRECTORY='/path/to/your/videos/'
 # The port you want to serve the API
 PORT=5020
+```
+
+Note: If you are running out of memory, [try to increase the amount of memory Node can use.](https://nodejs.org/docs/latest-v20.x/api/cli.html#--max-old-space-sizesize-in-mib) You can set this in your `.env` file. For example, if you want 8GB of RAM, add this as a new variable:
+
+```sh
+NODE_OPTIONS=--max_old_space_size=8192
 ```
 
 ```sh
