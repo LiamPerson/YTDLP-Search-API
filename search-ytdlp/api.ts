@@ -80,9 +80,31 @@ const getParametersFromRequest = (requestQuery: Record<string, string>): Request
 	return { query, results, cores, directory, sort }
 }
 
-const handleSearch = (request: any, response: any) => {
+/**
+ * Stores the pending requests for usage.
+ */
+const requestQueue: { request: any; response: any; requestNumber: number }[] = []
+
+const addToQueue = (request: any, response: any) => {
 	const requestNumber = ++requestCount
+	requestQueue.push({ request, response, requestNumber })
 	console.log(`Request #${requestNumber} received ...`)
+	trySearch()
+}
+
+/**
+ * Is a search job currently running?
+ */
+let runningJob: boolean = false
+const trySearch = () => {
+	if (runningJob) return
+
+	const currentRequest = requestQueue.shift()
+	if (!currentRequest) return
+
+	const { request, response, requestNumber } = currentRequest
+
+	runningJob = true
 	const startTime = Date.now()
 
 	let params
@@ -134,8 +156,12 @@ const handleSearch = (request: any, response: any) => {
 			return response.json(responseData)
 		})
 		.catch((err) => {
+			const error = `Request #${requestNumber} failed in ${Date.now() - startTime}ms. ${err.message}`
 			console.error(err)
-			return response.status(500).send('Internal Server Error')
+			return response.status(500).send(error)
+		})
+		.finally(() => {
+			runningJob = false
 		})
 }
 
@@ -150,7 +176,7 @@ if (isMainThread) {
 		console.log(`Server is running on port ${PORT}`)
 	})
 
-	app.get('/search', handleSearch)
+	app.get('/search', addToQueue)
 	app.get('/file', handleSend)
 } else {
 	const { query, workerFiles, jsonDirectory } = workerData as WorkerInformation
