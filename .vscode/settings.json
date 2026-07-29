@@ -5,5 +5,5 @@
 		"source.fixAll.eslint": "explicit"
 	},
 	"files.eol": "\n",
-	"cSpell.words": ["bionicle", "ffprobe", "mjpeg", "nokey", "noprint", "soundex", "vcodec", "YTDLP"]
+	"cSpell.words": ["bionicle", "ffprobe", "mjpeg", "nokey", "noprint", "OLLAMA", "soundex", "vcodec", "YTDLP"]
 }
