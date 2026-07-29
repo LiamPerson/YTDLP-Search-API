@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="color-scheme" content="dark light" />
+		<title>YTDLP Search</title>
+		<link rel="stylesheet" href="/styles.css" />
+		<script src="/app.js" defer></script>
+	</head>
+	<body>
+		<header class="topbar">
+			<div>
+				<p class="eyebrow">LOCAL VIDEO LIBRARY</p>
+				<h1>YTDLP Search</h1>
+			</div>
+			<div class="health" id="health" aria-live="polite">
+				<span class="health-dot"></span>
+				<span id="health-text">Connecting…</span>
+			</div>
+		</header>
+
+		<main>
+			<section class="search-panel" aria-label="Search controls">
+				<form id="search-form">
+					<label class="search-field">
+						<span class="sr-only">Search videos</span>
+						<svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" /></svg>
+						<input id="query" name="q" type="search" autocomplete="off" placeholder="Search titles, descriptions, channels, tags, playlists…" autofocus />
+						<kbd>/</kbd>
+					</label>
+					<button class="primary" type="submit">Queue search</button>
+				</form>
+				<div class="options">
+					<label>Sort
+						<select id="sort">
+							<option value="normal">Best match</option>
+							<option value="fuzzy">Typo tolerance</option>
+							<option value="language">Token relevance</option>
+							<option value="random">Random</option>
+						</select>
+					</label>
+					<label>Results
+						<select id="limit">
+							<option>20</option>
+							<option selected>40</option>
+							<option>80</option>
+							<option>120</option>
+						</select>
+					</label>
+					<button class="secondary" id="random" type="button">Surprise me</button>
+					<button class="secondary" id="refresh" type="button" title="Usually unnecessary; live sidecar updates are automatic.">Full rescan</button>
+				</div>
+				<div class="search-status" id="search-status" aria-live="polite">Ready.</div>
+				<section class="queue-panel" aria-labelledby="queue-heading">
+					<div class="queue-heading">
+						<div>
+							<span class="queue-title" id="queue-heading">Search queue</span>
+							<span class="queue-summary" id="queue-summary">No pending searches</span>
+						</div>
+						<button class="queue-clear" id="queue-clear" type="button">Clear finished</button>
+					</div>
+					<p class="queue-empty" id="queue-empty">Submit several searches; they will run in order while your current results stay available.</p>
+					<ol class="search-queue" id="search-queue" aria-label="Queued searches"></ol>
+				</section>
+			</section>
+
+			<div class="workspace">
+				<section class="results-section" aria-labelledby="results-heading">
+					<div class="section-heading">
+						<div>
+							<p class="eyebrow">RESULTS</p>
+							<h2 id="results-heading">Your library</h2>
+						</div>
+						<span id="result-count"></span>
+					</div>
+					<div class="empty-state" id="empty-state">
+						<h3>Search everything yt-dlp knows about your videos.</h3>
+						<p>The index uses only local <code>.info.json</code> sidecars. Press <kbd>/</kbd> anywhere to search.</p>
+					</div>
+					<ol class="results" id="results" aria-label="Search results"></ol>
+					<button class="load-more" id="load-more" type="button" hidden>Load more</button>
+				</section>
+
+				<aside class="player-panel" aria-label="Video player">
+					<div class="player-shell">
+						<video id="player" controls preload="metadata"></video>
+						<div class="player-placeholder" id="player-placeholder">
+							<span>▶</span>
+							<p>Select a result to play it here.</p>
+						</div>
+					</div>
+					<div class="now-playing">
+						<p class="eyebrow">NOW PLAYING</p>
+						<h2 id="playing-title">Nothing selected</h2>
+						<p id="playing-meta">Use ↑/↓ or J/K to move, then press Enter.</p>
+						<div class="now-playing-links">
+							<a id="open-file" href="#" target="_blank" rel="noopener" hidden>Open media endpoint</a>
+							<a id="open-sidecar" href="#" target="_blank" rel="noopener" hidden>Open .info.json</a>
+						</div>
+					</div>
+					<div class="shortcuts">
+						<span><kbd>J</kbd><kbd>K</kbd> navigate</span>
+						<span><kbd>Enter</kbd> play</span>
+						<span><kbd>Esc</kbd> stop</span>
+					</div>
+				</aside>
+			</div>
+		</main>
+	</body>
+</html>
