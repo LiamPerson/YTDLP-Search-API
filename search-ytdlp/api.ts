@@ -103,8 +103,6 @@ const trySearch = () => {
 	if (!currentRequest) return
 
 	const { request, response, requestNumber } = currentRequest
-	console.log(`Starting work on retrieving Request Number: #${requestNumber}`)
-	console.log(`There are ${requestQueue.length} items left in the queue.`)
 
 	runningJob = true
 	const startTime = Date.now()
